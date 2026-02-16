@@ -28,16 +28,16 @@ export function useSwipe() {
                         relevance_score: relevanceScore,
                         updated_at: new Date().toISOString(),
                     },
-                    { onConflict: 'user_id,faculty_id' }
+                    { onConflict: 'user_id, faculty_id' }
                 )
                 .select()
                 .single();
 
             if (sbError) throw sbError;
             return data as Interaction;
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Swipe error:', err);
-            setError(err.message);
+            setError(err instanceof Error ? err.message : 'Swipe failed.');
             return null;
         } finally {
             setLoading(false);

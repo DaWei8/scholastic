@@ -69,7 +69,7 @@ export default function SwipeDeck({ faculties: initialFaculties, userId }: Swipe
             {faculties.length === 0 && (
                 <div className="flex flex-col items-center justify-center h-full text-center p-8 bg-zinc-50 rounded-3xl border-2 border-dashed border-zinc-200">
                     <p className="text-zinc-500 font-medium italic">
-                        You've seen all matches. Check back later for more!
+                        You&apos;ve seen all matches. Check back later for more!
                     </p>
                 </div>
             )}

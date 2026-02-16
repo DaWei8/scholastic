@@ -6,11 +6,11 @@ import SwipeDeck from "@/components/swipe/SwipeDeck";
 import ProfileForm from "@/components/profile/ProfileForm";
 import { Faculty } from "@/types";
 import { useAuth } from "@/context/AuthContext";
-import { ArrowLeft, LogOut } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Navbar from "@/components/ui/Navbar";
 
 export default function DashboardPage() {
-    const { user, loading: authLoading, signOut } = useAuth();
+    const { user, loading: authLoading } = useAuth();
     const router = useRouter();
     const [matches, setMatches] = useState<
         (Faculty & { similarity: number })[] | null
@@ -45,7 +45,7 @@ export default function DashboardPage() {
         }
     };
 
-    const handleProfileComplete = (data: any) => {
+    const handleProfileComplete = (data: { fullName: string; degreeLevel: string; resumeText: string; researchInterests: string; targetCountries: string[]; additionalInfo: string }) => {
         // Profile data can be saved to Supabase profiles table here
         console.log("Profile completed:", data);
     };
@@ -84,7 +84,7 @@ export default function DashboardPage() {
                                 </h1>
                                 <p className="text-base text-[var(--color-text-secondary)] max-w-lg mx-auto">
                                     Tell us about your research background, interests, and
-                                    preferences. We'll use this to find the best supervisors and
+                                    preferences. We&apos;ll use this to find the best supervisors and
                                     scholarships for you.
                                 </p>
                             </div>

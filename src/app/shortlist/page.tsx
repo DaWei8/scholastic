@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { Interaction, Faculty, OutreachLog } from "@/types";
-import { Mail, GraduationCap, MapPin, Sparkles, ChevronRight, Send, CheckCircle2 } from "lucide-react";
+import { Faculty, OutreachLog } from "@/types";
+import { Mail, GraduationCap, MapPin, Sparkles, ChevronRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 
 interface ShortlistedFaculty extends Faculty {
@@ -39,7 +39,7 @@ export default function ShortlistPage() {
                     .eq('interactions.status', 'shortlisted');
 
                 if (error) throw error;
-                setShortlisted(data as any);
+                setShortlisted(data as ShortlistedFaculty[]);
             } catch (err) {
                 console.error("Error fetching shortlist:", err);
             } finally {
@@ -122,7 +122,7 @@ export default function ShortlistPage() {
                                                 <div className="bg-indigo-50/50 p-4 rounded-2xl border border-indigo-100 flex gap-3">
                                                     <Sparkles className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
                                                     <p className="text-sm text-zinc-700 leading-relaxed italic">
-                                                        "{interaction.match_explanation}"
+                                                        &quot;{interaction.match_explanation}&quot;
                                                     </p>
                                                 </div>
                                             )}

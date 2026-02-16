@@ -85,10 +85,10 @@ export async function POST(req: Request) {
             emailBody: data.emailBody
         });
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Outreach Generation Error:', error);
         return NextResponse.json(
-            { success: false, error: error.message || "Internal Server Error" },
+            { success: false, error: error instanceof Error ? error.message : "Internal Server Error" },
             { status: 500 }
         );
     }

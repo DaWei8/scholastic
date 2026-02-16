@@ -34,10 +34,10 @@ export async function POST(req: Request) {
             matches
         });
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('AI Matching Route Error:', error);
         return NextResponse.json(
-            { success: false, error: error.message || "Internal Server Error" },
+            { success: false, error: error instanceof Error ? error.message : "Internal Server Error" },
             { status: 500 }
         );
     }

@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Upload, Search, FileText, AlertCircle } from "lucide-react";
+import { Search, FileText, AlertCircle } from "lucide-react";
+import { Faculty } from "@/types";
 
 interface ResumeUploadProps {
-    onMatchesFound: (matches: any[]) => void;
+    onMatchesFound: (matches: (Faculty & { similarity: number })[]) => void;
 }
 
 export default function ResumeUpload({ onMatchesFound }: ResumeUploadProps) {
@@ -38,8 +39,8 @@ export default function ResumeUpload({ onMatchesFound }: ResumeUploadProps) {
             localStorage.setItem("lastResumeText", resumeText);
 
             onMatchesFound(data.matches);
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : "Something went wrong.");
         } finally {
             setLoading(false);
         }
@@ -54,7 +55,7 @@ export default function ResumeUpload({ onMatchesFound }: ResumeUploadProps) {
                 </h2>
                 <p className="text-zinc-500">
                     Paste your resume, a bio, or a summary of your research interests.
-                    We'll use AI to find the best faculty matches for you.
+                    We&apos;ll use this to find the best matches for you.
                 </p>
             </div>
 

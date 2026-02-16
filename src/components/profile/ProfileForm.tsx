@@ -167,10 +167,10 @@ export default function ProfileForm({
                                     }
                                 }}
                                 className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${isActive
-                                        ? "bg-[var(--color-primary)] text-white"
-                                        : isDone
-                                            ? "bg-[var(--color-primary-light)] text-[var(--color-primary)] cursor-pointer"
-                                            : "bg-[var(--color-bg-muted)] text-[var(--color-text-tertiary)]"
+                                    ? "bg-[var(--color-primary)] text-white"
+                                    : isDone
+                                        ? "bg-[var(--color-primary-light)] text-[var(--color-primary)] cursor-pointer"
+                                        : "bg-[var(--color-bg-muted)] text-[var(--color-text-tertiary)]"
                                     }`}
                             >
                                 {isDone ? (
@@ -183,8 +183,8 @@ export default function ProfileForm({
                             {i < STEPS.length - 1 && (
                                 <div
                                     className={`w-6 h-px ${isDone
-                                            ? "bg-[var(--color-primary)]"
-                                            : "bg-[var(--color-border)]"
+                                        ? "bg-[var(--color-primary)]"
+                                        : "bg-[var(--color-border)]"
                                         }`}
                                 />
                             )}
@@ -200,7 +200,7 @@ export default function ProfileForm({
                     <div className="space-y-6 animate-fade-up">
                         <div>
                             <h2 className="text-xl font-bold text-[var(--color-text)] mb-1">
-                                Let's start with the basics
+                                Let&apos;s start with the basics
                             </h2>
                             <p className="text-sm text-[var(--color-text-secondary)]">
                                 Tell us a bit about yourself so we can personalize your
@@ -245,8 +245,8 @@ export default function ProfileForm({
                                             type="button"
                                             onClick={() => updateField("degreeLevel", level)}
                                             className={`px-4 py-2.5 rounded-xl text-sm font-semibold border transition-all duration-200 ${formData.degreeLevel === level
-                                                    ? "bg-[var(--color-primary)] text-white border-[var(--color-primary)]"
-                                                    : "bg-white text-[var(--color-text-secondary)] border-[var(--color-border)] hover:border-[var(--color-text-tertiary)]"
+                                                ? "bg-[var(--color-primary)] text-white border-[var(--color-primary)]"
+                                                : "bg-white text-[var(--color-text-secondary)] border-[var(--color-border)] hover:border-[var(--color-text-tertiary)]"
                                                 }`}
                                         >
                                             {level}
@@ -294,7 +294,7 @@ export default function ProfileForm({
                                 What are your research interests?
                             </h2>
                             <p className="text-sm text-[var(--color-text-secondary)]">
-                                List the topics, fields, or specific problems you're most
+                                List the topics, fields, or specific problems you&apos;re most
                                 interested in. This helps us find the best fit.
                             </p>
                         </div>
@@ -319,8 +319,8 @@ export default function ProfileForm({
                                 Where would you like to study?
                             </h2>
                             <p className="text-sm text-[var(--color-text-secondary)]">
-                                Select the countries you're interested in. This helps us filter
-                                scholarships and supervisors for you. You can skip this if you're
+                                Select the countries you&apos;re interested in. This helps us filter
+                                scholarships and supervisors for you. You can skip this if you&apos;re
                                 open to anywhere.
                             </p>
                         </div>
@@ -332,8 +332,8 @@ export default function ProfileForm({
                                     type="button"
                                     onClick={() => toggleCountry(country.code)}
                                     className={`flex items-center gap-3 p-3 rounded-xl border text-sm font-medium transition-all duration-200 text-left ${formData.targetCountries.includes(country.code)
-                                            ? "bg-[var(--color-primary-light)] border-[var(--color-primary)] text-[var(--color-primary)]"
-                                            : "bg-white border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-text-tertiary)]"
+                                        ? "bg-[var(--color-primary-light)] border-[var(--color-primary)] text-[var(--color-primary)]"
+                                        : "bg-white border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-text-tertiary)]"
                                         }`}
                                 >
                                     <span className="text-lg">{country.flag}</span>

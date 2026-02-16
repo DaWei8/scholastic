@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Search, SlidersHorizontal } from "lucide-react";
+import { Search } from "lucide-react";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import { SectionHeader } from "@/components/ui/DesignSystem";
 import ScholarshipCard from "@/components/scholarships/ScholarshipCard";
-import { scholarships, Scholarship } from "@/data/scholarships";
+import { scholarships } from "@/data/scholarships";
 
 type Region = "All" | "US" | "UK" | "China" | "EU";
 
@@ -91,8 +91,8 @@ export default function ScholarshipsPage() {
                                     key={r.value}
                                     onClick={() => setActiveRegion(r.value)}
                                     className={`px-4 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 ${activeRegion === r.value
-                                            ? "bg-[var(--color-primary)] text-white"
-                                            : "bg-[var(--color-bg-muted)] text-[var(--color-text-secondary)] hover:bg-[var(--color-primary-light)] hover:text-[var(--color-primary)]"
+                                        ? "bg-[var(--color-primary)] text-white"
+                                        : "bg-[var(--color-bg-muted)] text-[var(--color-text-secondary)] hover:bg-[var(--color-primary-light)] hover:text-[var(--color-primary)]"
                                         }`}
                                 >
                                     {r.flag} {r.label}

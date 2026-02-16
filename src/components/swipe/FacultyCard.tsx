@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion, useMotionValue, useTransform, PanInfo } from "framer-motion";
 import { Faculty } from "@/types";
 import { GraduationCap, MapPin, Sparkles } from "lucide-react";
+import Image from "next/image";
 
 interface FacultyCardProps {
     faculty: Faculty;
@@ -23,7 +24,7 @@ export default function FacultyCard({
     const rotate = useTransform(x, [-200, 200], [-25, 25]);
     const opacity = useTransform(x, [-200, -150, 0, 150, 200], [0, 1, 1, 1, 0]);
 
-    const handleDragEnd = (_: any, info: any) => {
+    const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
         if (info.offset.x > 100) onSwipeRight();
         else if (info.offset.x < -100) onSwipeLeft();
     };
@@ -39,7 +40,7 @@ export default function FacultyCard({
             {/* Faculty Image / Placeholder */}
             <div className="relative h-48 bg-[var(--color-primary)] flex items-center justify-center">
                 {faculty.image_url ? (
-                    <img src={faculty.image_url} alt={faculty.name} className="w-full h-full object-cover" />
+                    <Image src={faculty.image_url} alt={faculty.name} className="w-full h-full object-cover" fill sizes="(max-width: 768px) 100vw, 384px" />
                 ) : (
                     <GraduationCap className="w-20 h-20 text-white opacity-40" />
                 )}
