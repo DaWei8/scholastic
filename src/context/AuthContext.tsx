@@ -34,11 +34,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        // Safety timeout: if auth takes longer than 10s, stop loading
+        const timeout = setTimeout(() => {
+            setLoading(false);
+        }, 10000);
+
         // Get initial session
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session);
             setUser(session?.user ?? null);
             setLoading(false);
+            clearTimeout(timeout);
+        }).catch((err) => {
+            console.error("Failed to get session:", err);
+            setLoading(false);
+            clearTimeout(timeout);
         });
 
         // Listen for auth changes
@@ -50,7 +60,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setLoading(false);
         });
 
-        return () => subscription.unsubscribe();
+        return () => {
+            subscription.unsubscribe();
+            clearTimeout(timeout);
+        };
     }, []);
 
     const signUp = async (email: string, password: string) => {

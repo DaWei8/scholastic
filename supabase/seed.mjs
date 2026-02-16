@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js';
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
@@ -14,8 +13,33 @@ if (!supabaseUrl || !supabaseAnonKey || !geminiKey) {
 }
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
-const genAI = new GoogleGenerativeAI(geminiKey);
-const embeddingModel = genAI.getGenerativeModel({ model: "text-embedding-004" });
+
+const BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models";
+
+/**
+ * Generate an embedding using Gemini gemini-embedding-001 via REST API.
+ * Returns a 3072-dimensional vector.
+ */
+async function embedContent(text) {
+    const res = await fetch(
+        `${BASE_URL}/gemini-embedding-001:embedContent?key=${geminiKey}`,
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                content: { parts: [{ text }] },
+            }),
+        }
+    );
+
+    if (!res.ok) {
+        const err = await res.text();
+        throw new Error(`Gemini embedContent error: ${res.status} - ${err}`);
+    }
+
+    const data = await res.json();
+    return data.embedding?.values ?? [];
+}
 
 const facultyData = [
     {
@@ -79,8 +103,7 @@ async function seed() {
         // Combine fields for better embedding quality
         const textToEmbed = `${faculty.name} is a faculty at ${faculty.institution} in the ${faculty.department} department. ${faculty.bio_summary} Interests: ${faculty.research_interests.join(", ")}`;
         
-        const result = await embeddingModel.embedContent(textToEmbed);
-        const embedding = result.embedding.values;
+        const embedding = await embedContent(textToEmbed);
 
         const { error } = await supabase
             .from('faculty')

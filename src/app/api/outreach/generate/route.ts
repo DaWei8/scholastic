@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { geminiModel } from '@/lib/gemini';
+import { generateContent } from '@/lib/gemini';
 import { supabase } from '@/lib/supabase';
 
 export async function POST(req: Request) {
@@ -45,8 +45,7 @@ export async function POST(req: Request) {
             }
         `;
 
-        const result = await geminiModel.generateContent(prompt);
-        const responseText = result.response.text();
+        const responseText = await generateContent(prompt);
 
         // Clean up JSON if necessary (Gemini sometimes adds markdown blocks)
         const jsonMatch = responseText.match(/\{[\s\S]*\}/);

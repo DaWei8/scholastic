@@ -6,7 +6,7 @@ export interface Faculty {
     email?: string;
     bio_summary?: string;
     research_interests: string[];
-    embedding?: number[]; // vector(768)
+    embedding?: number[]; // vector(3072)
     website_url?: string;
     image_url?: string;
     is_accepting_students: boolean;
@@ -19,7 +19,7 @@ export interface Profile {
     field_of_study: string;
     resume_url?: string;
     resume_text?: string;
-    embedding?: number[]; // vector(768)
+    embedding?: number[]; // vector(3072)
     updated_at: string;
 }
 
